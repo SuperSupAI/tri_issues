@@ -1,0 +1,14 @@
+venv/
+media/
+static/
+__pycache__/
+.env
+data/
+test_inbox/
+Pipfile
+Pipfile.lock
+.vscode/
+.well-known/
+ssl/
+bkwsgi.py
+SOP/

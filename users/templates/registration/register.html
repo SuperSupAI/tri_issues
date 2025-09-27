@@ -1,0 +1,42 @@
+
+{% extends 'home/base.html' %}
+{% load widget_tweaks %}
+
+{% block site_title %} Register {% endblock %}
+{% block content %}
+<section class="content-section content-section-single">
+  <div>
+    <h3 class="content-title"> Register </h3>
+
+    <form action="{% url 'register' %}" method="POST" autocomplete="off">
+      {% csrf_token %}
+     
+      <div class="form-field">
+        {{ form.username.label_tag }}
+        {{ form.username.error }}
+        <!--
+        {{ form.username }}-->
+        
+        {% render_field form.username class="form-control" hx-post="/users/check_username/" hx-trigger="keyup" hx-target="#username-error"  %}
+        <div id="username-error"></div>
+
+        {{ form.email.label_tag }}
+        {{ form.email.errors }}
+        {% render_field form.email class="form-control"%}
+
+        {{ form.password1.label_tag }}
+        {{ form.password1.errors }}
+        {% render_field form.password1 class="form-control"%}
+
+        {{ form.password2.label_tag }}
+        {{ form.password2.errors }}
+        {% render_field form.password2 class="form-control"%}
+      </div>
+      <p>
+        <div><button class="button button-primary" type="submit">Register</button></div>
+      </p>
+
+    </form>
+  </div>
+</section>
+{% endblock %} 

@@ -1,0 +1,41 @@
+{% extends 'home/base.html' %}
+{% block site_title %} Home {% endblock %}
+{% block content %}
+<div class="content-section content-section-single">
+
+  {% if not user.is_authenticated %}
+  <h3> <a class="site-header-item" href="{% url 'login' %}">Login</a> </h3>
+  
+  {% endif %}
+  <br/> <br/>
+  <h4>Today : {{ today}} </h4>
+  <br/><br/>
+
+    <div class="site-header-item">
+      <a href="{% url 'issues' %}"><span>Issues </span></a>
+    </div>
+
+ <!--
+  <img style="max-width: 50%;" src="media/calendar/2025-1.jpg">
+  <img style="max-width: 50%;" src="media/calendar/2025-2.jpg">
+
+
+  <div style="line-height: 1.8;">    
+        <h4 align="text-left">Your Location - {{ data.query }}</h4>
+        <p align="text-left">
+          <ul>
+            <li>Country: {{ data.country }}</li>
+            <li>City: {{ data.city }}</li>
+            <li>Latitude: {{ data.lat }}</li>
+            <li>Longitude: {{ data.lon }}</li>
+            <li>Country Code: {{ data.countryCode }}</li>
+            <li>Timezone: {{ data.timezone }}</li>
+            <li>Zip: {{ data.zip }}</li>
+            <li>ISP: {{ data.isp }}</li>
+          </ul>
+        </p>
+  </div>
+  
+  -->
+</div>
+{% endblock %} 

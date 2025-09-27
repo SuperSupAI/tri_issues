@@ -1,0 +1,33 @@
+{% extends 'home/base.html' %}
+
+{% block site_title %}Login {% endblock %}
+
+{% block content %}
+<section class="content-section content-section-single">
+<div >
+  <h3 class="content-title"> Login </h3>
+    <form action="{% url 'login' %}" method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      
+      {{ form.username.label_tag }}
+      {{ form.username }}
+      {{ form.username.errors }}
+      {{ form.password.label_tag }}
+      {{ form.password }}
+      {{ form.password.errors }}
+      {% if request.GET.next %}
+        <input type="hidden" name="next" value="{{request.GET.next}}">
+      {% endif %}
+      <p>
+        <button class="button button-primary" type="submit"> Login </button>
+      </p>
+      
+      <p>
+        <a href="{% url 'password_reset' %}">Forget password?</a>
+      </p>
+        
+    </form>
+</div>
+</section>
+{% endblock %}

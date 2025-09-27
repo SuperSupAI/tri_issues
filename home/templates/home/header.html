@@ -1,0 +1,47 @@
+{% load static %}
+
+<header class="site-header">
+  
+  <a class="site-header-item site-header-brand" href="{% url 'home' %}">
+    <img src="{% static 'logo.png' %}">
+  </a>
+  {% if user.is_authenticated %}
+    <div class="site-header-item"><a>
+      <span><h3>{{ user.username |capfirst }}</h3></span></a>
+    </div>
+    <div class="site-header-item">
+      <a href="{% url 'home' %}"><span>Home</span></a>
+    </div>
+
+    {% if user.is_superuser %}
+      
+    <div class="site-header-item">
+      <a href="{% url 'register' %}"><span>Register</span></a>
+    </div> 
+    <div class="site-header-item">
+      <a href="{% url 'password_change' %}"><span>Change password</span></a>
+    </div>
+    {% endif %}
+<!--
+    <div class="site-header-item">
+      <a href="{% url 'password_change' %}"><span>Change password</span></a>
+    </div>
+    -->
+    <div class="site-header-item">
+      <a href="javascript:history.go(-1)">back</a>
+    </div> 
+    <form class="site-header-item" action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="button button-primary" type="submit">  <span>Logout</span> </button>
+    </form>
+
+
+  
+  {% else %}
+    <a class="site-header-item" href="{% url 'login' %}">
+      <span>Login</span>
+    </a>
+  {% endif %}
+
+
+</header>

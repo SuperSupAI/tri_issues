@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>{% block site_title %}{% endblock %} | TRI TH </title>
+
+    <link rel='icon' href = "{% static 'favicon.ico' %}">
+    <link rel="stylesheet" href="{% static 'normalize.css' %}">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+   
+    <!-- HTMX -->
+    <script src="https://unpkg.com/htmx.org@1.9.11"></script>
+
+    <script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+    <script src="{% static 'sorttable.js' %}"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/xlsx/dist/xlsx.full.min.js"></script>
+
+
+</head>
+<body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
+    
+    {% include 'home/header.html' %}
+    {% block content %}
+    {% endblock %}
+    {% block scripts %}{% endblock %}
+    {% include 'home/footer.html' %}
+
+</body>
+</html>
