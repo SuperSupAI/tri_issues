@@ -11,10 +11,11 @@
   <h4>Today : {{ today}} </h4>
   <br/><br/>
 
+  {% if user.is_authenticated %}
     <div class="site-header-item">
       <a href="{% url 'issues' %}"><span>Issues </span></a>
     </div>
-
+  {% endif %}
  <!--
   <img style="max-width: 50%;" src="media/calendar/2025-1.jpg">
   <img style="max-width: 50%;" src="media/calendar/2025-2.jpg">
