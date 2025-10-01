@@ -12,6 +12,9 @@
     <div class="site-header-item">
       <a href="{% url 'home' %}"><span>Home</span></a>
     </div>
+    <div class="site-header-item">
+      <a href="{% url 'member_issue' user.username  %}"><span>Pending Issues </span></a>
+    </div>
 
     {% if user.is_superuser %}
       

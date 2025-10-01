@@ -1,0 +1,20 @@
+{% extends 'home/base.html' %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+
+{% block site_title %} Edit Issue {% endblock %}
+{% block content %}
+
+  <form class="content-section content-section-single"  method="POST">   
+    {% csrf_token %}
+    {{form | crispy }} 
+
+    <div>
+      <button class="button button-primary" type="submit" >Edit Issue</button>
+    </div>
+  </form>
+
+</div>
+
+
+{% endblock %}

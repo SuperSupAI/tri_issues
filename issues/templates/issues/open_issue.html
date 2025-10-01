@@ -1,0 +1,27 @@
+{% extends 'home/base.html' %}
+{% block site_title %} Open ISSUE {% endblock %}
+{% block content %}
+
+<div class="content-section content-section-single">
+<form action="{% url 'open_issue' %}" method="post">
+  <h3>Open Issues</h3>
+    {% csrf_token %}
+    <p> {{ form.issue.label_tag }}{{ form.issue }}</p>
+    <p>{{ form.date.label_tag }}{{ form.date }}</p>
+    <p> {{ form.serial_no.label_tag }}{{ form.serial_no }}</p>
+    <p> {{ form.customer.label_tag }}{{ form.customer }}</p>
+    <p> {{ form.machine.label_tag }}{{ form.machine }}</p>
+    <p><label for="{{ form.model.id_for_label }}" class="custom-label">
+      Machine model
+    </label>
+    {{ form.model }}</p>
+    <p> {{ form.problem.label_tag }}{{ form.problem }}</p>
+    <p> {{ form.progress.label_tag }}{{ form.progress }}</p>
+    <p> {{ form.status.label_tag }}{{ form.status }}</p>
+    <p> {{ form.priority.label_tag }}{{ form.priority }}</p>
+    <button class="button button-primary" type="submit">Open issue</button>
+
+</form>
+</div>
+
+{% endblock %}

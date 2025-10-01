@@ -1,10 +1,73 @@
 {% extends 'home/base.html' %}
-{% block site_title %} Home {% endblock %}
+{% block site_title %} ISSUE {% endblock %}
 {% block content %}
+
 <div class="content-section content-section-single">
+  <h3>Issues</h3>
+  <form action=""method="POST">
+    {% csrf_token %}
+    <p>From : <input type="date" name="fromdate" value="{{ fromdate |date:"Y-m-d" }}"/>
+      To : <input type="date" name="todate" value="{{ todate |date:"Y-m-d" }}"/></p>
+    <button type="submit" value="search"> Search </button>
+  </form>
 
-
-
-    
+    <div>
+    <h3> Tracking Issue {{ fromdate |date:'d/m/Y' }} - {{ todate |date:'d/m/Y'  }} </h3>  
+    <!--
+      <h6>AXI</h6>
+        <p>{{df3 | safe }}</p>
+      <h6>AOI</h6>
+        <p>{{df4 | safe }}</p>
+      <h6>SPI</h6>
+        <p>{{df7 | safe }}</p>
+      <h6>ICT</h6>
+        <p>{{df5 | safe }}</p>
+      <h6>N/A</h6>
+        <p>{{df6 | safe }}</p>
+    </div>
+    <h3> Tracking Issue :  </h3> -->
+    <table class="sortable">
+      <tr>
+        <th>Machine</th>
+        <th style="width: 15%;">Issue</th>
+        <th>Open date</th>
+        <th>Customer</th>
+        <th style="width: 30%;">Progress</th>
+        <th>Executor</th>
+        <th>Status</th>
+        <th>Latest update</th>
+        <th>Status</th>
+        <th>Priority</th>
+        {% if user.is_superuser %}
+        <th>Update</th>
+        {% endif %}
+      </tr>
+    {% for a , o ,i in issue %}
+      <tr>
+        <td>{{a.machine}}</td>
+        <td style="width: 15%;"><a href="{% url 'issue' a.issue %}">{{a.issue}}</a></td>
+        <td>{{o}}</td>
+        <td>{{a.customer}}</td>
+        <td>{{a.progress |linebreaks}}</td>
+        <td>{{a.executor | capfirst }}</td>
+        <td>{{i}} days</td>
+        <td>{{a.date}}</td>
+        <td>{{a.status}}</td>
+    {% if a.priority == "HIGH" %}  
+      <td style="background-color: #FFB3B3;">{{ a.priority }} </td>
+    {% elif a.priority == "MEDIUM" %}
+      <td style="background-color: #FFFFB3;">{{ a.priority }} </td>
+    {% elif a.priority == "LOW" %}
+      <td style="background-color: #B3FFB3;">{{ a.priority }} </td>
+    {% elif a.priority == "LOAN PART" %} 
+      <td style="background-color: #B3B3FF;">{{ a.priority }} </td>
+    {% endif %}
+        {% if user.is_superuser %}
+        <td><a href="{% url 'update_issue' a.issue %}">update</a></td>
+        {% endif %}
+      </tr>  
+    {% endfor %}
+    </table>
 </div>
-{% endblock %} 
+
+{% endblock %}

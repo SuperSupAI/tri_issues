@@ -1,0 +1,47 @@
+{% extends 'home/base.html' %}
+{% block site_title %} ISSUE {% endblock %}
+{% block content %}
+
+<div class="content-section content-section-single">
+
+<table>
+    <tr>
+      <th style="width: 15%;">ISSUE</th>
+      <th>Date</th> 
+      <th>Customer</th>
+      <th style="width: 12%;">Machine, Model, Serial No.</th>
+      <th style="width: 20%;">Problem</th>
+      <th style="width: 30%;">Progress</th>
+      <th>Executor</th>
+      <th>Status</th>
+      <th>Priority</th>
+    </tr>
+
+  {% for issue in q_issue %}
+    <tr>
+      <td style="width: 15%;">{{ issue.issue |linebreaks}} </td>
+      <td>{{ issue.date }} </td>
+      <td>{{ issue.customer }} </td>
+      <td style="width: 12%;">{{ issue.machine }},{{ issue.model }}, <a href="#">{{ issue.serial_no }}</a> </td>
+      <td style="width: 20%;">{{ issue.problem |linebreaks}} </td>
+      <td style="width: 30%;">{{ issue.progress |linebreaks }} </td>
+      <td>{{ issue.executor |capfirst }} </td>
+      <td>{{ issue.status }} </td>
+    {% if issue.priority == "HIGH" %}  
+      <td style="background-color: #FFB3B3;">{{ issue.priority }} </td>
+    {% elif issue.priority == "MEDIUM" %}
+      <td style="background-color: #FFFFB3;">{{ issue.priority }} </td>
+    {% elif issue.priority == "LOW" %}
+      <td style="background-color: #B3FFB3;">{{ issue.priority }} </td>
+    {% elif issue.priority == "LOAN PART" %} 
+      <td style="background-color: #B3B3FF;">{{ issue.priority }} </td>
+    {% endif %}
+    </tr>
+  {% endfor %}
+  </table>
+  
+  <h1>{{ error }}</h1>
+
+</div>
+
+{% endblock %}

@@ -11,9 +11,14 @@
   <h4>Today : {{ today}} </h4>
   <br/><br/>
 
-  {% if user.is_authenticated %}
+  {% if user.is_authenticated and not user.is_superuser %}
     <div class="site-header-item">
-      <a href="{% url 'issues' %}"><span>Issues </span></a>
+      <a href="{% url 'member_issue' user.username  %}"><span>Pending Issues </span></a>
+    </div>
+  {% endif %}
+  {% if user.is_superuser  %}
+    <div class="site-header-item">
+      <a href="{% url 'issues' %}"><span>All Pending Issues </span></a>
     </div>
   {% endif %}
  <!--
