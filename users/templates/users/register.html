@@ -10,13 +10,9 @@
 
     <form action="{% url 'register' %}" method="POST" autocomplete="off">
       {% csrf_token %}
-     
       <div class="form-field">
         {{ form.username.label_tag }}
         {{ form.username.error }}
-        <!--
-        {{ form.username }}-->
-        
         {% render_field form.username class="form-control" hx-post="/users/check_username/" hx-trigger="keyup" hx-target="#username-error"  %}
         <div id="username-error"></div>
 
